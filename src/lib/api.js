@@ -1,5 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8081';
-
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'https://api.aroma-naur.ru';
 async function request(path, options = {}) {
   const { token, body, headers, ...rest } = options;
   const finalHeaders = new Headers(headers || {});
