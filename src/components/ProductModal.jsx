@@ -1,7 +1,20 @@
-import { memo } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import { InstagramIcon, WhatsAppIcon } from './SocialIcons';
 
 function ProductModal({ product, onClose }) {
+  const availableVolumes = useMemo(
+    () => product?.availableVolumes || product?.available_volumes || [5, 10, 30],
+    [product?.availableVolumes, product?.available_volumes],
+  );
+  const unitPrice = Number(product?.price_per_ml ?? product?.price ?? 0);
+  const [selectedVolume, setSelectedVolume] = useState(availableVolumes[0] || 10);
+
+  useEffect(() => {
+    setSelectedVolume(availableVolumes[0] || 10);
+  }, [availableVolumes]);
+
+  const selectedPrice = Math.round(unitPrice * selectedVolume);
+
   if (!product) return null;
 
   const contactLinks = [
@@ -53,14 +66,20 @@ function ProductModal({ product, onClose }) {
               <em>{product.notesText || product.notes}</em>
             </div>
             <div className="modal-volumes" aria-label="Доступные объёмы">
-              {(product.availableVolumes || product.available_volumes || [5, 10, 30]).map((volume) => (
-                <span className="vol-chip" key={volume}>
+              {availableVolumes.map((volume) => (
+                <button
+                  type="button"
+                  className={`vol-chip ${selectedVolume === volume ? 'active' : ''}`}
+                  key={volume}
+                  onClick={() => setSelectedVolume(volume)}
+                  aria-pressed={selectedVolume === volume}
+                >
                   {volume} мл
-                </span>
+                </button>
               ))}
             </div>
             <div className="modal-price">
-              от {product.price * 10} ₽ <span>/ 10 мл</span>
+              от {selectedPrice} ₽ <span>/ {selectedVolume} мл</span>
             </div>
             <div className="modal-socials">
               <div className="modal-socials-title">Связаться</div>

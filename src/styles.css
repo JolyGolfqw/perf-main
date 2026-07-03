@@ -1718,15 +1718,22 @@ footer {
 
 .modal-notes {
   color: var(--text-secondary);
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.85;
   margin-bottom: 24px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .modal-notes em {
-  color: var(--text-tertiary);
-  font-family: var(--serif);
-  font-style: italic;
+  display: inline-block;
+  margin-top: 8px;
+  color: #f1e2bf;
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 500;
 }
 
 .modal-volumes {
@@ -1737,11 +1744,36 @@ footer {
 }
 
 .vol-chip {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--gray-light);
   padding: 8px 14px;
   font-size: 13px;
   color: var(--text-secondary);
   border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--transition),
+    color 0.25s var(--transition),
+    background 0.25s var(--transition),
+    transform 0.25s var(--transition);
+}
+
+.vol-chip:hover {
+  border-color: rgba(200, 165, 92, 0.35);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.vol-chip.active {
+  border-color: var(--gold);
+  color: var(--bg);
+  background: var(--gold);
+}
+
+.vol-chip:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .modal-price {
@@ -2226,7 +2258,14 @@ footer {
   }
 
   .product-img {
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 4 / 5;
+  }
+
+  .product-real-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .product-info {

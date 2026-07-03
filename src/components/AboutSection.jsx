@@ -4,7 +4,9 @@ function AboutSection() {
   return (
     <section className="section" id="about">
       <div className="about-inner">
-        <div className="about-visual">◈</div>
+        <div className="about-visual">◈
+          {/* <img src="/logo.webp" alt="" /> */}
+        </div>
         <div>
           <p className="section-label">О проекте</p>
           <h2 className="section-title">
