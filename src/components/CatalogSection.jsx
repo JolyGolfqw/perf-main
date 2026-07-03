@@ -106,6 +106,7 @@ const Pagination = memo(function Pagination({ page, total, limit, onPageChange }
 });
 
 function CatalogSection({
+  sectionRef,
   categories,
   products,
   total,
@@ -127,7 +128,7 @@ function CatalogSection({
   const skeletonCount = Math.max(4, Math.min(limit || 12, 8));
 
   return (
-    <section className="section" id="catalog">
+    <section className="section" id="catalog" ref={sectionRef}>
       <p className="section-label">Коллекция</p>
       <h2 className="section-title">
         Найди <em>свой</em> аромат

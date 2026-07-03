@@ -54,6 +54,7 @@ function App() {
   });
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const catalogCacheRef = useRef(new Map());
+  const catalogSectionRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setNavScrolled(window.scrollY > 40);
@@ -211,6 +212,10 @@ function App() {
 
   const handlePageChange = useCallback((page) => {
     setCatalogQuery((current) => ({ ...current, page }));
+    catalogSectionRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   }, []);
 
   const handleAdminLogin = useCallback(async (email, password) => {
@@ -307,6 +312,7 @@ function App() {
         <Hero />
         <Marquee brands={marqueeBrands} />
         <CatalogSection
+          sectionRef={catalogSectionRef}
           categories={categories}
           products={publicProducts}
           total={catalogState.total}
